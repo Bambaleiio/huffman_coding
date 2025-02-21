@@ -17,7 +17,6 @@
 
 int main() {
     
-    // COMPRESS
     auto start = std::chrono::high_resolution_clock::now();
     
     const char* inputFile = "Input.txt";
@@ -116,12 +115,8 @@ int main() {
     }
     
     
-    // tail -> len -> data
-    /* reinterpret_cast 
-        In C++, reinterpret_cast is a casting operator that converts a pointer of one data type into a pointer of another data type, regardless of the relationship between the types. It essentially reinterprets the bit pattern of the value as a new type. It can also convert between pointer types and integral types.
-        reinterpret_cast is considered the most dangerous cast in C++ because it bypasses type checking and allows for potentially unsafe conversions. It should be used with extreme caution and only when necessary, as misuse can lead to undefined behavior, data corruption, and program crashes.
-        C++
-    */
+    // freq -> tail -> len -> data
+    outFile.write(reinterpret_cast<const char*>(freq), MAX_SYMBOLS * sizeof(unsigned char));
     outFile.write(reinterpret_cast<const char*>(&tail), sizeof(tail));
     outFile.write(reinterpret_cast<const char*>(&len),  sizeof(len));
     outFile.write(reinterpret_cast<const char*>(compressedData.data()), compressedData.size());

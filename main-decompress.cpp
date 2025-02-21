@@ -55,8 +55,8 @@ void decompressFile(const char* compressedFile, const char* outputFile) {
     bitString.reserve(len * 8);
     for (int i = 0; i < len; ++i) {
         char byte = compressedData[i];
-        for (int b = 7; b >= 0; --b) {
-            if (i == len - 1 && tail != 0 && b > (tail - 1)) continue;
+        for (int b = 0; b < 8; ++b) {
+            if (i == len - 1 && tail != 0 && b > (tail - 1)) break;
             bitString.push_back((byte & (1 << b)) ? '1' : '0');
         }
     }
